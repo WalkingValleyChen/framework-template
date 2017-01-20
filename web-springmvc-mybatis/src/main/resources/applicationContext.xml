@@ -11,7 +11,9 @@
 
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	
-	<context:component-scan base-package="com.chen.*"/>
+	<context:component-scan base-package="com.chen.*">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
