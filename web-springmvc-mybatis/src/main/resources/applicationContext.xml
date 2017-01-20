@@ -16,17 +16,12 @@
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>classpath:${package.environment}/c3p0.properties</value>
+				<value>classpath:${package.environment}/db.properties</value>
 				<value>classpath:${package.environment}/config.properties</value>
-				<value>classpath:${package.environment}/redis.properties</value>
 			</list>
 		</property>
 		<property name="ignoreUnresolvablePlaceholders" value="true"/>
 	</bean>
-
 	<import resource="classpath:data-source.xml"/>
-	<import resource="classpath*:config/redis-config.xml"/>
-	<import resource="classpath:redis-source.xml"/>
-	<import resource="classpath:beans.xml"/>
-	
+
 </beans>
