@@ -49,5 +49,35 @@
 		<property name="maxUploadSize" value="10485760"/>
 	</bean>
 
+	<mvc:interceptors>
+		<!--限流拦截器-->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
 
+			<bean class="limit.RateLimitInterceptor">
+				<!--全局限流-->
+				<property name="globalRate" value="1000"/>
+				<!--单url限流-->
+				<property name="urlProperties">
+					<props>
+						<prop key="/get/{id}">1</prop>
+					</props>
+				</property>
+				<!--多url限流-->
+				<property name="limitMappings">
+					<list>
+						<bean class="limit.model.URLLimitMapping">
+							<constructor-arg index="0">
+								<array>
+									<value>/get/{id}</value>
+									<value>/get/*</value>
+								</array>
+							</constructor-arg>
+							<constructor-arg index="1" value="1"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
