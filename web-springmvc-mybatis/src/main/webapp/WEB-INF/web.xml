@@ -4,10 +4,7 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-  	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml</param-value>
-	</context-param>
+
 	
 	<servlet>
 		<servlet-name>springMVC</servlet-name>
@@ -23,16 +20,6 @@
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
-<!-- 	<filter> -->
-<!-- 	    <filter-name>CrossFilter</filter-name> -->
-<!-- 	    <filter-class>com.jdh.common.conf.CrossFilter</filter-class> -->
-<!-- 	</filter> -->
-	
-<!-- 	<filter-mapping> -->
-<!-- 	    <filter-name>CrossFilter</filter-name> -->
-<!-- 	    <url-pattern>/*</url-pattern> -->
-<!-- 	</filter-mapping> -->
 	
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
@@ -50,28 +37,6 @@
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<listener>
-		<description>spring listener</description>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	
-	<error-page>
-		<error-code>403</error-code>
-		<location>/403</location>
-	</error-page>
-	
-	<error-page>
-		<error-code>404</error-code>
-		<location>/404</location>
-	</error-page>
-	
-	<error-page>
-		<error-code>405</error-code>
-		<location>/405</location>
-	</error-page>
 
-	<error-page>
-		<error-code>500</error-code>
-		<location>/500</location>
-	</error-page>
+	
 </web-app>

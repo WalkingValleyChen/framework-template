@@ -7,7 +7,7 @@ public enum LoggerEnum {
 
 	private String loggerName;
 
-	private LoggerEnum(String loggerName) {
+	LoggerEnum(String loggerName) {
 		this.loggerName = loggerName;
 	}
 
