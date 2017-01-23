@@ -38,5 +38,20 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<listener>
+		<listener-class>com.chen.listener.MetricsServletContextListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.chen.listener.HealthCheckServletContextListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>metrics</servlet-name>
+		<servlet-class>com.codahale.metrics.servlets.AdminServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>metrics</servlet-name>
+		<url-pattern>/metrics/*</url-pattern>
+	</servlet-mapping>
 	
 </web-app>

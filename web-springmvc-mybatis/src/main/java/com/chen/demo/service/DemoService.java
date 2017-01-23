@@ -2,6 +2,8 @@ package com.chen.demo.service;
 
 import com.chen.demo.entity.Demo;
 import com.chen.service.BaseService;
+import com.codahale.metrics.annotation.Counted;
+import com.codahale.metrics.annotation.Timed;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,4 +13,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DemoService extends BaseService<Demo>{
+
+    @Timed
+    public int test(){
+        return 1;
+    }
 }

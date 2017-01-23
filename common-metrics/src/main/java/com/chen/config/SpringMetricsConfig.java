@@ -29,7 +29,7 @@ public class SpringMetricsConfig extends MetricsConfigurerAdapter {
         registerReporter(ConsoleReporter
                 .forRegistry(metricRegistry)
                 .build())
-                .start(1, TimeUnit.HOURS);
+                .start(1, TimeUnit.MINUTES);
     }
 
     public MetricRegistry getMetricRegistry() {
