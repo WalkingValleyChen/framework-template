@@ -1,12 +1,17 @@
 package com.chen.demo.entity;
 
 
+import com.wordnik.swagger.annotations.ApiModel;
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotNull;
 
+@ApiModel(value = "demo bean")
 public class Demo {
 
     private Integer id;
 
+    @ApiModelProperty(value = "名称", required = true)
     @NotNull(message = "名称不能为空")
     private String name;
 
