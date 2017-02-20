@@ -1,6 +1,9 @@
 package com.chen.demo.entity;
 
 
+import com.wordnik.swagger.annotations.ApiModel;
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotNull;
 
 public class Demo {
