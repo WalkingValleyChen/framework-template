@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util"
-	   xmlns:context="http://www.springframework.org/schema/context"
-	   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
-	   xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:metrics="http://www.ryantenney.com/schema/metrics"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:metrics="http://www.ryantenney.com/schema/metrics"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
@@ -17,80 +17,86 @@
         http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util.xsd http://www.ryantenney.com/schema/metrics http://www.ryantenney.com/schema/metrics/metrics.xsd">
 
-	<!--去掉了applicationContext.xml，
-		当不需要多个dispatcherServlet的时候，
-		父容器并没有什么作用，反而带来更多的复杂性
-		个人推荐去掉
-		-->
+    <!--去掉了applicationContext.xml，
+        当不需要多个dispatcherServlet的时候，
+        父容器并没有什么作用，反而带来更多的复杂性
+        个人推荐去掉
+        -->
 
-	<util:properties id="dbProp"
-					 location="classpath*:${package.environment}/db.properties" />
-	<util:properties id="configProp"
-					 location="classpath*:${package.environment}/config.properties" />
+    <util:properties id="dbProp"
+                     location="classpath*:${package.environment}/db.properties"/>
+    <util:properties id="configProp"
+                     location="classpath*:${package.environment}/config.properties"/>
 
-	<context:component-scan base-package="com.chen.*">
-	</context:component-scan>
+    <context:component-scan base-package="com.chen.*">
+    </context:component-scan>
 
-	<!--mvc配置-->
-	<mvc:annotation-driven validator="validator">
-		<mvc:message-converters register-defaults="true">
-			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
-				<property name="supportedMediaTypes" value="text/plain;charset=UTF-8"/>
-			</bean>
-			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-				<property name="supportedMediaTypes" value="application/json;charset=UTF-8"/>
-				<property name="objectMapper">
-					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
-						<property name="dateFormat">
-							<bean class="java.text.SimpleDateFormat">
-								<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
-							</bean>
-						</property>
-					</bean>
-				</property>
-			</bean>
-		</mvc:message-converters>
-	</mvc:annotation-driven>
+    <!--mvc配置-->
+    <mvc:annotation-driven validator="validator">
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value="text/plain;charset=UTF-8"/>
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes" value="application/json;charset=UTF-8"/>
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="dateFormat">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
+                            </bean>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
-	<!--校验-->
-	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-		<property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
-	</bean>
-	<mvc:default-servlet-handler/>
+    <!--校验-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+    </bean>
+    <mvc:default-servlet-handler/>
 
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="10485760"/>
-	</bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485760"/>
+    </bean>
 
-	<mvc:interceptors>
-		<!--限流拦截器-->
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
+    <mvc:interceptors>
+        <!--限流拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="limit.SimpleRateLimitInterceptor">
+                <constructor-arg index="0" value="3"/>
+            </bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
 
-			<bean class="limit.RateLimitInterceptor">
-				<!--全局限流-->
-				<property name="globalRate" value="1000"/>
-				<!--单url限流-->
-				<property name="urlProperties">
-					<props>
-						<prop key="/get/{id}">1</prop>
-					</props>
-				</property>
-				<!--多url限流-->
-				<property name="limitMappings">
-					<list>
-						<bean class="limit.model.URLLimitMapping">
-							<constructor-arg index="0">
-								<array>
-									<value>/get/{id}</value>
-									<value>/get/*</value>
-								</array>
-							</constructor-arg>
-							<constructor-arg index="1" value="1"/>
-						</bean>
-					</list>
-				</property>
-			</bean>
-		</mvc:interceptor>
-	</mvc:interceptors>
+            <bean class="limit.RateLimitInterceptor">
+                <!--全局限流-->
+                <property name="globalRate" value="1000"/>
+                <!--单url限流-->
+                <property name="urlProperties">
+                    <props>
+                        <prop key="/get/{id}">1</prop>
+                    </props>
+                </property>
+                <!--&lt;!&ndash;多url限流&ndash;&gt;-->
+                <!--<property name="limitMappings">-->
+                    <!--<list>-->
+                        <!--<bean class="limit.model.URLLimitMapping">-->
+                            <!--<constructor-arg index="0">-->
+                                <!--<array>-->
+                                    <!--<value>/get/{id}</value>-->
+                                    <!--<value>/get/*</value>-->
+                                <!--</array>-->
+                            <!--</constructor-arg>-->
+                            <!--<constructor-arg index="1" value="1"/>-->
+                        <!--</bean>-->
+                    <!--</list>-->
+                <!--</property>-->
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
