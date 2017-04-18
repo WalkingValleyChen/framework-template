@@ -28,15 +28,6 @@
     <util:properties id="configProp"
                      location="classpath*:${package.environment}/config.properties"/>
 
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:${package.environment}/redis.properties</value>
-            </list>
-        </property>
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
-    </bean>
-
 
     <context:component-scan base-package="com.chen.*">
     </context:component-scan>
@@ -76,14 +67,20 @@
         <!--限流拦截器-->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="limit.SimpleRateLimitInterceptor">
+            <bean class="com.chen.limit.SimpleRateLimitInterceptor">
                 <constructor-arg index="0" value="3"/>
+            </bean>
+        </mvc:interceptor>
+        <!--debug拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.chen.interceptor.RequestInfoInterceptor">
             </bean>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
 
-            <bean class="limit.RateLimitInterceptor">
+            <bean class="com.chen.limit.RateLimitInterceptor">
                 <!--全局限流-->
                 <property name="globalRate" value="1000"/>
                 <!--单url限流-->

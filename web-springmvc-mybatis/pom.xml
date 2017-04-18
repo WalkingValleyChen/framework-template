@@ -94,11 +94,11 @@
                 <version>9.4.3.v20170317</version>
 
                 <configuration>
-                    <contextPath>/demo</contextPath>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/demo</contextPath>
+                    </webApp>
                     <stopKey>foo</stopKey>
                     <stopPort>9999</stopPort>
-                    <webDefaultXml>src/main/resources/temp/webdefault.xml</webDefaultXml>
                 </configuration>
             </plugin>
 

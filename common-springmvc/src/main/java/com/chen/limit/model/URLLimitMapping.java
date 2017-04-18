@@ -1,4 +1,4 @@
-package limit.model;
+package com.chen.limit.model;
 
 /**
  * @author ValleyChen

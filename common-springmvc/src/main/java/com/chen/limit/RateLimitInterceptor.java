@@ -1,12 +1,9 @@
-package limit;
+package com.chen.limit;
 
+import com.chen.limit.model.URLLimitMapping;
 import com.chen.utils.LoggerUtil;
 import com.google.common.base.Joiner;
 import com.google.common.util.concurrent.RateLimiter;
-import limit.model.URLLimitMapping;
-import org.springframework.core.io.Resource;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;

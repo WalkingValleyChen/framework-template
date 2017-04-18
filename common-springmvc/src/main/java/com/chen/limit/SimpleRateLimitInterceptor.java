@@ -1,4 +1,4 @@
-package limit;
+package com.chen.limit;
 
 import com.chen.utils.LoggerUtil;
 import com.google.common.util.concurrent.RateLimiter;
