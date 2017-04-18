@@ -42,24 +42,10 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class DBConfig{
 
-//    @Value("#{dbProp['mysql.url']}")
-//    public  String jdbcUrl;
-//    @Value("#{dbProp['mysql.username']}")
-//    public  String username;
-//    @Value("#{dbProp['mysql.password']}")
-//    public  String password;
-//    @Value("#{dbProp['initialPoolSize']}")
-//    public  int initialPoolSize;
-//    @Value("#{dbProp['minPoolSize']}")
-//    public  int minPoolSize;
-//    @Value("#{dbProp.maxPoolSize}")
-//    public  int maxPoolSize;
-
 
     /**
      * druid datasource spring bean
      *
-     * @configuration无法使用@value注入值，待后续修改，先用Propertis.getProperty
      * @param dbProp
      * @return
      * @throws SQLException

@@ -27,6 +27,8 @@
                      location="classpath*:${package.environment}/db.properties"/>
     <util:properties id="configProp"
                      location="classpath*:${package.environment}/config.properties"/>
+    <util:properties id="redisProp"
+                     location="classpath*:${package.environment}/redis.properties"/>
 
     <context:component-scan base-package="com.chen.*">
     </context:component-scan>

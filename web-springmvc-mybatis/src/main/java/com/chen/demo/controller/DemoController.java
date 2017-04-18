@@ -30,16 +30,12 @@ public class DemoController {
     @Autowired
     private DemoService demoService;
 
-    @Autowired
-    private Tester tester;
-
     @Timed
     @ResponseBody
     @RequestMapping(value = "/get/{id}")
     @ApiOperation(value = "demo获取", httpMethod = "GET", response = Demo.class, notes = "get demo")
     public Demo get(@PathVariable("id") int id) {
         demoService.test();
-        tester.test();
         return demoService.get(id);
     }
 

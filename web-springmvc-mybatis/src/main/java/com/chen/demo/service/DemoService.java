@@ -4,6 +4,7 @@ import com.chen.demo.entity.Demo;
 import com.chen.service.BaseService;
 import com.codahale.metrics.annotation.Counted;
 import com.codahale.metrics.annotation.Timed;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,8 +15,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class DemoService extends BaseService<Demo>{
 
-    @Timed
+    @Cacheable(value = "testMap")
     public int test(){
+        System.out.println("get One");
         return 1;
     }
 }

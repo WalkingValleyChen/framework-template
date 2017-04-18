@@ -16,6 +16,7 @@
         <module>common-mybatis</module>
         <module>common-metrics</module>
         <module>common-swagger-springmvc</module>
+        <module>common-redisson</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
