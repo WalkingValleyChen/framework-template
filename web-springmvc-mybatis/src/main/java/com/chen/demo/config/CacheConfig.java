@@ -29,10 +29,7 @@ public class CacheConfig {
 
     @Bean
     CacheManager cacheManager(RedissonClient redissonClient) {
-        Map<String, org.redisson.spring.cache.CacheConfig> config = new HashMap<String, org.redisson.spring.cache.CacheConfig>();
-        // 创建一个名称为"testMap"的缓存，过期时间ttl，同时最长空闲时maxIdleTime。
-        config.put("testMap", new org.redisson.spring.cache.CacheConfig(10 * 60 * 1000, 5 * 60 * 1000));
-        return new RedissonSpringCacheManager(redissonClient, config);
+        return new RedissonSpringCacheManager(redissonClient, "classpath:/cache-config.yaml");
     }
 
 }
