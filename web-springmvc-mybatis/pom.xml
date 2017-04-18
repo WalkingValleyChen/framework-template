@@ -28,16 +28,17 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session -->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session</artifactId>
+            <version>1.3.0.RELEASE</version>
+        </dependency>
+
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>jsp-2.1</artifactId>
-            <version>6.1.10</version>
         </dependency>
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
@@ -88,9 +89,9 @@
 
             <!-- 添加此插件以便启动jetty -->
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.10</version>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.3.v20170317</version>
 
                 <configuration>
                     <contextPath>/demo</contextPath>
@@ -118,18 +119,21 @@
             <id>local</id>
             <properties>
                 <package.environment>local</package.environment>
+                <session.redis.address>redis://127.0.0.1:6379</session.redis.address>
             </properties>
         </profile>
         <profile>
             <id>test</id>
             <properties>
                 <package.environment>test</package.environment>
+                <session.redis.address>redis://127.0.0.1:6379</session.redis.address>
             </properties>
         </profile>
         <profile>
             <id>product</id>
             <properties>
                 <package.environment>product</package.environment>
+                <session.redis.address>redis://127.0.0.1:6379</session.redis.address>
             </properties>
         </profile>
     </profiles>

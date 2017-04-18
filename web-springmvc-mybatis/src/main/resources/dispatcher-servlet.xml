@@ -27,8 +27,16 @@
                      location="classpath*:${package.environment}/db.properties"/>
     <util:properties id="configProp"
                      location="classpath*:${package.environment}/config.properties"/>
-    <util:properties id="redisProp"
-                     location="classpath*:${package.environment}/redis.properties"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:${package.environment}/redis.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
 
     <context:component-scan base-package="com.chen.*">
     </context:component-scan>
@@ -84,20 +92,6 @@
                         <prop key="/get/{id}">1</prop>
                     </props>
                 </property>
-                <!--&lt;!&ndash;多url限流&ndash;&gt;-->
-                <!--<property name="limitMappings">-->
-                    <!--<list>-->
-                        <!--<bean class="limit.model.URLLimitMapping">-->
-                            <!--<constructor-arg index="0">-->
-                                <!--<array>-->
-                                    <!--<value>/get/{id}</value>-->
-                                    <!--<value>/get/*</value>-->
-                                <!--</array>-->
-                            <!--</constructor-arg>-->
-                            <!--<constructor-arg index="1" value="1"/>-->
-                        <!--</bean>-->
-                    <!--</list>-->
-                <!--</property>-->
             </bean>
         </mvc:interceptor>
     </mvc:interceptors>

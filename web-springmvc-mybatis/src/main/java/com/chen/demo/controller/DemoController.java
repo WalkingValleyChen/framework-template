@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -24,18 +25,16 @@ import javax.validation.Valid;
  * @create 2017-01-20
  */
 @Controller
-//@Api(value = "/", description = "测试api")
 public class DemoController {
 
     @Autowired
     private DemoService demoService;
 
-    @Timed
     @ResponseBody
     @RequestMapping(value = "/get/{id}")
     @ApiOperation(value = "demo获取", httpMethod = "GET", response = Demo.class, notes = "get demo")
-    public Demo get(@PathVariable("id") int id) {
-        demoService.test();
+    public Demo get(@PathVariable("id") int id, HttpSession session) {
+        session.setAttribute("test",demoService.test());
         return demoService.get(id);
     }
 

@@ -17,19 +17,6 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
         </encoder>
     </appender>
-
-    <appender name="console" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/home/java/application_log/demo/console-%d{yyyy-MM-dd}.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>20MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
-        </encoder>
-    </appender>
     
     <appender name="default" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -50,10 +37,6 @@
         <appender-ref ref="error"/>
     </logger>
 
-    <logger name="console" level="info">
-        <appender-ref ref="console"/>
-    </logger>
-    
 
     <!-- spring日志级别设置 -->
     <logger name="org.springframework" level="WARN"/>
