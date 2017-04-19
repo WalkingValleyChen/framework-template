@@ -22,6 +22,11 @@ RequestInfoInterceptor request信息拦截器，输出到日志，方便开发
 如果需要使用servlet查看监控数据的话,需要在web.xml中配置metrics servlet和listener。
 例子可见web-springmvc-mybatis web.xml
 
+#####  common-feign
+ feign是一个调用远程http接口的java服务端工具，就像调用本地方法一样方便
+ 这里封装了feign的日志记录，gson序列化，form提交和一个简单的复杂均衡器
+ 按照这种模式，可以很轻易的构建自己的负载均衡算法
+
 ###项目模板
 ##### web-springmvc-mybatis 
 一个springmvc+mybatis的模板 
