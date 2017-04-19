@@ -17,6 +17,8 @@
         <module>common-metrics</module>
         <module>common-swagger-springmvc</module>
         <module>common-redisson</module>
+        <module>common-http-remote-feign</module>
+        <module>http-remote-feign</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
