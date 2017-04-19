@@ -27,6 +27,7 @@ public class Remote {
             .target(DemoRemoteService.class, "http://localhost:8080/demo");
 
     public static void main(String[] args) {
+        //运行需启动web-springmvc-mybatis项目的http接口
         Demo demo = target.get(1);
         System.out.println("get:"+Coder.GSON.toJson(demo));
 
