@@ -18,9 +18,9 @@ import feign.okhttp.OkHttpClient;
  * @date 2017/4/19
  */
 public class Remote {
-    private  static DemoRemoteService target = Feign
+    private static DemoRemoteService target = Feign
             .builder()
-            .logger(new CustomFeignLoger())
+            .logger(new CustomFeignLoger()).logLevel(Logger.Level.FULL)
             .client(new OkHttpClient())
             .encoder(new FormEncoder(new GsonEncoder(Coder.GSON)))
             .decoder(new GsonDecoder(Coder.GSON))
@@ -29,11 +29,11 @@ public class Remote {
     public static void main(String[] args) {
         //运行需启动web-springmvc-mybatis项目的http接口
         Demo demo = target.get(1);
-        System.out.println("get:"+Coder.GSON.toJson(demo));
+        System.out.println("get:" + Coder.GSON.toJson(demo));
 
         Demo add = new Demo();
         add.setName("feign add");
         BaseResponse addResult = target.add(add);
-        System.out.println("add:"+Coder.GSON.toJson(addResult));
+        System.out.println("add:" + Coder.GSON.toJson(addResult));
     }
 }

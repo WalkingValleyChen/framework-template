@@ -29,4 +29,3 @@ RequestInfoInterceptor request信息拦截器，输出到日志，方便开发
 
 ##### http-remote-feign
 使用feign调用远程项目的http接口，就像调用本地service一样,用于测试和分布式项目的远程访问都挺好用的
-logger这块记录还有点问题，待以后解决
