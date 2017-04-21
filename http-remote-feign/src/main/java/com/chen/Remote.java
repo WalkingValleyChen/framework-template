@@ -1,5 +1,7 @@
 package com.chen;
 
+import com.chen.feign.FeinUtils;
+import com.chen.feign.contract.FormContract;
 import com.chen.feign.encoder.FormEncoder;
 import com.chen.feign.coder.Coder;
 import com.chen.feign.log.CustomFeignLoger;
@@ -27,28 +29,22 @@ public class Remote {
         put("http://localhost:8080/demo", 2);
         put("http://127.0.0.1:8080/demo", 1);
     }};
-    private static DemoRemoteService target = Feign
-            .builder()
-            .logger(new CustomFeignLoger()).logLevel(Logger.Level.FULL)
-            .client(new OkHttpClient())
-            .encoder(new FormEncoder(new GsonEncoder(Coder.GSON)))
-            .decoder(new GsonDecoder(Coder.GSON))
-            .target(new RoundRobinTarget<DemoRemoteService>(DemoRemoteService.class, urls));
+    private static DemoRemoteService target = FeinUtils.newFormClient(new RoundRobinTarget<DemoRemoteService>(DemoRemoteService.class, urls));
 
     public static void main(String[] args) {
         //运行需启动web-springmvc-mybatis项目的http接口
-        Demo demo = target.get(1);
-        System.out.println("get:" + Coder.GSON.toJson(demo));
+//        Demo demo = target.get(1);
+//        System.out.println("get:" + Coder.GSON.toJson(demo));
+//
+//        demo = target.get(1);
+//        demo = target.get(1);
+//        demo = target.get(1);
+//        demo = target.get(1);
+//        demo = target.get(1);
 
-        demo = target.get(1);
-        demo = target.get(1);
-        demo = target.get(1);
-        demo = target.get(1);
-        demo = target.get(1);
-
-//        Demo add = new Demo();
-//        add.setName("feign add");
-//        BaseResponse addResult = target.add(add);
-//        System.out.println("add:" + Coder.GSON.toJson(addResult));
+        Demo add = new Demo();
+        add.setName("feign add");
+        BaseResponse addResult = target.add(add,1);
+        System.out.println("add:" + Coder.GSON.toJson(addResult));
     }
 }

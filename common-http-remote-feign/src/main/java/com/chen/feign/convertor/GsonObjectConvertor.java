@@ -13,6 +13,16 @@ import java.util.Map;
  * @date 2017/4/19
  */
 public class GsonObjectConvertor implements ObjectConvertor {
+
+    private static GsonObjectConvertor instatnce=new GsonObjectConvertor();
+
+    private GsonObjectConvertor() {
+    }
+
+    public static ObjectConvertor getInstance() {
+        return instatnce;
+    }
+
     @Override
     public Map<String, Object> toMap(Object o) throws ConvertException {
         if (o == null)

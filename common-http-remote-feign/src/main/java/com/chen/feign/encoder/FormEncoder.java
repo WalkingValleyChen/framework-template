@@ -12,9 +12,7 @@ import feign.form.MultipartEncodedDataProcessor;
 import lombok.val;
 
 import java.lang.reflect.Type;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  *
@@ -33,6 +31,11 @@ public class FormEncoder implements Encoder {
 
     private ObjectConvertor objectConvertor;
 
+    public static  String FORM_PARAM_NAME="@FORM@";
+
+    private String formParamName;
+
+
     /**
      * Default {@code FormEncoder} constructor.
      * <p>
@@ -40,13 +43,14 @@ public class FormEncoder implements Encoder {
      */
     public FormEncoder() {
         this(new Encoder.Default());
-        objectConvertor=new GsonObjectConvertor();
+        objectConvertor=GsonObjectConvertor.getInstance();
     }
 
     public FormEncoder(Encoder delegate){
-        this(delegate,new GsonObjectConvertor());
+        this(delegate,GsonObjectConvertor.getInstance(),FORM_PARAM_NAME);
     }
-    public FormEncoder(Encoder delegate,ObjectConvertor objectConvertor) {
+    public FormEncoder(Encoder delegate,ObjectConvertor objectConvertor,String formParamName) {
+        this.formParamName = formParamName;
         this.deligate = delegate;
         this.objectConvertor=objectConvertor;
         processors = new HashMap<String, FormDataProcessor>(2, 1.F);
@@ -82,6 +86,7 @@ public class FormEncoder implements Encoder {
                             LoggerUtil.log("cannot convert this object");
                         }
                     }
+
                     break;
                 }
             }
@@ -102,7 +107,29 @@ public class FormEncoder implements Encoder {
 
         @SuppressWarnings("unchecked")
         Map<String, Object> data = (Map<String, Object>) object;
+        formObjectExpand(data);
         processors.get(formType).process(data, template);
+    }
+
+    private void formObjectExpand(Map<String, Object> data) {
+        List<String> readyRemove=new ArrayList<>();
+        Map<String,Object> insert=new HashMap<>();
+        for(String key:data.keySet()){
+            if(key.startsWith(FORM_PARAM_NAME)){
+                Object value = data.get(key);
+                readyRemove.add(key);
+                try {
+                    insert.putAll(objectConvertor.toMap(value));
+                } catch (ConvertException e) {
+                    LoggerUtil.logException(e);
+                }
+            }
+        }
+        //ConcurrentModificationException
+        data.putAll(insert);
+        for (String key : readyRemove) {
+            data.remove(key);
+        }
     }
 
 
