@@ -4,8 +4,11 @@ import com.chen.feign.FeinFactory;
 import com.chen.feign.coder.Coder;
 import com.chen.feign.target.RoundRobinTarget;
 import com.chen.model.Demo;
+import com.chen.request.Page;
 import com.chen.response.BaseResponse;
 import com.chen.service.DemoRemoteService;
+import com.chen.service.FeignTestService;
+import feign.Target;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,22 +29,28 @@ public class Remote {
     }};
 
     /**获取目标接口的代理对象*/
-    private static DemoRemoteService target = FeinFactory.newFormClient(new RoundRobinTarget<DemoRemoteService>(DemoRemoteService.class, urls));
+    private static FeignTestService target = FeinFactory.newFormClient(new Target.HardCodedTarget<>(FeignTestService.class,"http://localhost:8080/demo"));
 
     public static void main(String[] args) {
-        //运行需启动web-springmvc-mybatis项目的http接口
-//        Demo demo = target.get(1);
-//        System.out.println("get:" + Coder.GSON.toJson(demo));
-//
-//        demo = target.get(1);
-//        demo = target.get(1);
-//        demo = target.get(1);
-//        demo = target.get(1);
-//        demo = target.get(1);
+        Demo chen = new Demo();
+        chen.setName("chen");
 
-        Demo add = new Demo();
-        add.setName("feign add");
-        BaseResponse addResult = target.add(add,1);
-        System.out.println("add:" + Coder.GSON.toJson(addResult));
+        Page page = new Page();
+        page.setPageNum(1);
+        page.setPageSize(10);
+
+//        target.test1(chen);
+
+//        target.test2(1,"chen");
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name","chen");
+//        target.test3(map);
+
+        target.test4(chen);
+//
+//        target.test3(chen,page);
+//
+//        target.test4(chen,page);
     }
 }

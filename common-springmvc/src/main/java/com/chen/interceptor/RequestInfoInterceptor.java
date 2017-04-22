@@ -18,7 +18,7 @@ public class RequestInfoInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LoggerUtil.log("--------------------request info------------------------");
-        LoggerUtil.log("uri" + request.getRequestURI());
+        LoggerUtil.log("uri " + request.getRequestURI());
         LoggerUtil.log("parameter json:" + JSON.toJSONString(request.getParameterMap()));
         LoggerUtil.log("--------------------------------------------------------");
         return true;
@@ -26,12 +26,12 @@ public class RequestInfoInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        if (modelAndView != null) {
-            LoggerUtil.log("--------------------response info------------------------");
-            LoggerUtil.log("response view:" + modelAndView.getView());
-            LoggerUtil.log("response model:" + JSON.toJSONString(modelAndView.getModel()));
-            LoggerUtil.log("--------------------------------------------------------");
-        }
+//        if (modelAndView != null) {
+//            LoggerUtil.log("--------------------response info------------------------");
+//            LoggerUtil.log("response view:" + modelAndView.getView());
+//            LoggerUtil.log("response model:" + JSON.toJSONString(modelAndView.getModel()));
+//            LoggerUtil.log("--------------------------------------------------------");
+//        }
     }
 
     @Override
