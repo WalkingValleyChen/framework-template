@@ -1,6 +1,7 @@
 package com.chen.exception;
 
 /**
+ * 数据状态异常
  * @author Chenwl
  * @version 1.0.0
  */

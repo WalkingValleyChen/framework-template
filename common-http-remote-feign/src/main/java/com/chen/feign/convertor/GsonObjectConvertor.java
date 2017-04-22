@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.Map;
 
 /**
+ * object转换类
  * @author Chenwl
  * @version 1.0.0
  * @date 2017/4/19
@@ -23,6 +24,12 @@ public class GsonObjectConvertor implements ObjectConvertor {
         return instatnce;
     }
 
+    /**
+     * object转换为map
+     * @param o
+     * @return
+     * @throws ConvertException
+     */
     @Override
     public Map<String, Object> toMap(Object o) throws ConvertException {
         if (o == null)

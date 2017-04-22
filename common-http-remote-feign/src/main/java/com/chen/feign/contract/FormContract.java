@@ -1,20 +1,13 @@
 package com.chen.feign.contract;
 
-import com.chen.feign.annotation.Form;
-import com.chen.feign.convertor.GsonObjectConvertor;
-import com.chen.feign.convertor.ObjectConvertor;
+import com.chen.feign.annotation.FormBean;
 import feign.Contract;
 import feign.MethodMetadata;
 import feign.Param;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Map;
-
-import static feign.Util.checkState;
-import static feign.Util.emptyToNull;
 
 /**
  * @author Chenwl
@@ -40,8 +33,8 @@ public class FormContract extends Contract.Default {
         boolean isHttpAnnotation = super.processAnnotationsOnParameter(data, annotations, paramIndex);
         for (Annotation annotation : annotations) {
             Class<? extends Annotation> annotationType = annotation.annotationType();
-            if (annotationType == Form.class) {
-                Form paramAnnotation = (Form) annotation;
+            if (annotationType == FormBean.class) {
+                FormBean paramAnnotation = (FormBean) annotation;
                 String name=formParamName+paramIndex;
                 nameParam(data, name, paramIndex);
                 Class<? extends Param.Expander> expander = paramAnnotation.expander();

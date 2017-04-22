@@ -7,17 +7,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 全局返回对象
  * @author Chenwl
  * @version 1.0.0
  */
 public class BaseResponse<T> {
 
+    /**返回码*/
     private int code;
+    /**返回说明*/
     private String message;
+    /**返回内容*/
     private T value;
 
+    /**无内容-成功响应*/
     public static BaseResponse SUCCESS_RESPONSE = new BaseResponse(ResponseCodeEnum.SUCCESS);
+    /**无内容-异常响应*/
     public static BaseResponse ERROR_RESPONSE = new BaseResponse(ResponseCodeEnum.ERROR);
+    /**无内容-错误响应*/
     public static BaseResponse FAIL_RESPONSE = new BaseResponse(ResponseCodeEnum.FAIL);
 
     public BaseResponse() {

@@ -1,6 +1,7 @@
 package com.chen.enums;
 
 /**
+ * 全局返回码
  * @author Chenwl
  * @version 1.0.0
  */

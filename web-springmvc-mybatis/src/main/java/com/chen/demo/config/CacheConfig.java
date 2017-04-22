@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
+ * spring cache配置
  * @author Chenwl
  * @version 1.0.0
  * @date 2017/4/18

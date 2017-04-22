@@ -1,19 +1,11 @@
 package com.chen;
 
-import com.chen.feign.FeinUtils;
-import com.chen.feign.contract.FormContract;
-import com.chen.feign.encoder.FormEncoder;
+import com.chen.feign.FeinFactory;
 import com.chen.feign.coder.Coder;
-import com.chen.feign.log.CustomFeignLoger;
 import com.chen.feign.target.RoundRobinTarget;
 import com.chen.model.Demo;
 import com.chen.response.BaseResponse;
 import com.chen.service.DemoRemoteService;
-import feign.Feign;
-import feign.Logger;
-import feign.gson.GsonDecoder;
-import feign.gson.GsonEncoder;
-import feign.okhttp.OkHttpClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,11 +17,16 @@ import java.util.Map;
  */
 public class Remote {
 
+    /**
+     * url->权重 map
+     */
     private static Map<String, Integer> urls = new HashMap() {{
         put("http://localhost:8080/demo", 2);
         put("http://127.0.0.1:8080/demo", 1);
     }};
-    private static DemoRemoteService target = FeinUtils.newFormClient(new RoundRobinTarget<DemoRemoteService>(DemoRemoteService.class, urls));
+
+    /**获取目标接口的代理对象*/
+    private static DemoRemoteService target = FeinFactory.newFormClient(new RoundRobinTarget<DemoRemoteService>(DemoRemoteService.class, urls));
 
     public static void main(String[] args) {
         //运行需启动web-springmvc-mybatis项目的http接口

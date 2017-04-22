@@ -33,6 +33,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
+ * druid数据源配置
  * @author ValleyChen
  * @version 1.0.0
  * @time 2017/1/21

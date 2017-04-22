@@ -18,7 +18,7 @@ import java.util.*;
  *
  * 对fegin-form的一点封装，
  * feign-form需要指定参数名 post(@Param("email") String email, @Param("password") String password);
- * 本类会将object转为同等效果，不需指定@Param
+ * 本类会将注解了@FormBean的参数转为同等效果，不需指定@Param
  * @author Chenwl
  * @version 1.0.0
  * @date 2017/4/19
@@ -55,11 +55,11 @@ public class FormEncoder implements Encoder {
         this.objectConvertor=objectConvertor;
         processors = new HashMap<String, FormDataProcessor>(2, 1.F);
 
-        val formEncodedDataProcessor = new FormEncodedDataProcessor();
+        FormEncodedDataProcessor formEncodedDataProcessor = new FormEncodedDataProcessor();
         processors.put(formEncodedDataProcessor.getSupportetContentType().toLowerCase(),
                 formEncodedDataProcessor);
 
-        val multipartEncodedDataProcessor = new MultipartEncodedDataProcessor();
+        MultipartEncodedDataProcessor multipartEncodedDataProcessor = new MultipartEncodedDataProcessor();
         processors.put(multipartEncodedDataProcessor.getSupportetContentType().toLowerCase(),
                 multipartEncodedDataProcessor);
     }

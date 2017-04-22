@@ -4,6 +4,7 @@ import com.chen.utils.LoggerUtil;
 import feign.Logger;
 
 /**
+ * feign日志
  * @author Chenwl
  * @version 1.0.0
  * @date 2017/4/19

@@ -1,7 +1,7 @@
 package com.chen.service;
 
 
-import com.chen.feign.annotation.Form;
+import com.chen.feign.annotation.FormBean;
 import com.chen.model.Demo;
 import com.chen.response.BaseResponse;
 import feign.Headers;
@@ -21,5 +21,5 @@ public interface DemoRemoteService {
 
     @Headers("Content-Type: application/x-www-form-urlencoded")
     @RequestLine("POST /add")
-    public BaseResponse add(@Form Demo demo, @Param("aaa") int aaa);
+    public BaseResponse add(@FormBean Demo demo, @Param("aaa") int aaa);
 }

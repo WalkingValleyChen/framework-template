@@ -1,6 +1,7 @@
 package com.chen.exception;
 
 /**
+ * 全局业务异常
  * @author Chenwl
  * @version 1.0.0
  */

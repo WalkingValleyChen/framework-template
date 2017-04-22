@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 记录请求的参数和响应
  * @author Chenwl
  * @version 1.0.0
  * @date 2017/4/18

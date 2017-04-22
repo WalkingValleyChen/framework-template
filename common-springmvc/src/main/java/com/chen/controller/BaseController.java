@@ -25,6 +25,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * spring controller基类
+ * 定义了异常拦截栈，业务方法中异常最终会被此类捕获，给用户更好的错误提示
+ */
 @Controller("baseController")
 public abstract class BaseController {
 
@@ -49,10 +53,6 @@ public abstract class BaseController {
 
 
 	}
-
-
-
-
 
 
 

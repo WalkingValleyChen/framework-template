@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
+ * spring context工具类，可用来获取spring bean
  * @author Chenwl
  * @version 1.0.0
  * @create 2017-01-22

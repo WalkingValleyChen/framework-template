@@ -17,8 +17,14 @@ import feign.okhttp.OkHttpClient;
  * @version 1.0.0
  * @date 2017/4/20
  */
-public class FeinUtils {
+public class FeinFactory {
 
+    /**
+     * 生产form表单提交客户端
+     * @param target
+     * @param <T>
+     * @return
+     */
     public static <T> T newFormClient(Target<T> target) {
         return Feign
                 .builder()
@@ -29,6 +35,12 @@ public class FeinUtils {
                 .target(target);
     }
 
+    /**
+     * 生产客户端
+     * @param target
+     * @param <T>
+     * @return
+     */
     public static <T> T newClient(Target<T> target) {
         return Feign
                 .builder()

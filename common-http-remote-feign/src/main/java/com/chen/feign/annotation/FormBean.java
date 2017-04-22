@@ -11,13 +11,15 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
+ * 注解在参数上，表示此bean是form表单的参数
+ * contentType需符合FormEncoder.class要求
  * @author Chenwl
  * @version 1.0.0
  * @date 2017/4/20
  */
 @Retention(RUNTIME)
 @java.lang.annotation.Target(PARAMETER)
-public @interface Form {
+public @interface FormBean {
 
 
     /**

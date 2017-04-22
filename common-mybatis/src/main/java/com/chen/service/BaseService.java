@@ -3,8 +3,13 @@ package com.chen.service;
 import com.chen.mapper.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * 基础service
+ * @param <T>
+ */
 public class BaseService<T> {
 
+    /**泛型注入*/
     @Autowired
     private BaseMapper<T> baseMapper;
 

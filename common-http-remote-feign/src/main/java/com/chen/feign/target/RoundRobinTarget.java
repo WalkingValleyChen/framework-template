@@ -43,6 +43,10 @@ public class RoundRobinTarget<T> implements Target<T> {
         count=new AtomicInteger(0);
     }
 
+    /**
+     * 刷新url
+     * @param urls
+     */
     private void refresh(Map<String, Integer> urls) {
         urlList.clear();
         for (String url : urls.keySet()) {
@@ -63,11 +67,20 @@ public class RoundRobinTarget<T> implements Target<T> {
         return name;
     }
 
+    /**
+     * 轮询获取url
+     * @return
+     */
     @Override
     public String url() {
         return urlList.get(count.getAndIncrement()%urlList.size());
     }
 
+    /**
+     * requestTemplate url加上域名
+     * @param input
+     * @return
+     */
     @Override
     public Request apply(RequestTemplate input) {
         if (input.url().indexOf("http") != 0) {

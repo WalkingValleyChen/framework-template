@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
+ * 日志记录工具类
  * @author Chenwl
  * @version 1.0.0
  */

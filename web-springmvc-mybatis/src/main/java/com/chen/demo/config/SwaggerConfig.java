@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * swagger api配置
  * @author ValleyChen
  * @version 1.0.0
  * @time 2017/2/3
